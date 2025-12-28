@@ -1,5 +1,8 @@
 // ANDON System Rev B - JavaScript
 
+// Constants
+const MS_PER_MINUTE = 60000;
+
 class AndonSystem {
     constructor() {
         this.stations = [
@@ -29,7 +32,7 @@ class AndonSystem {
         this.populateFilterDropdown();
         
         // Update time display every minute
-        setInterval(() => this.renderHistory(), 60000);
+        setInterval(() => this.renderHistory(), MS_PER_MINUTE);
     }
 
     loadData() {
@@ -232,7 +235,8 @@ class AndonSystem {
                 return sum + responseTime;
             }, 0);
             const avgMs = totalResponseTime / resolvedAlerts.length;
-            avgResponse = Math.round(avgMs / 60000); // Convert to minutes
+            const avgMinutes = Math.round(avgMs / MS_PER_MINUTE);
+            avgResponse = avgMinutes;
         }
 
         document.getElementById('total-alerts').textContent = totalAlerts;
@@ -360,8 +364,11 @@ class AndonSystem {
     }
 
     showNotification(message, type) {
-        // Simple notification using alert for this version
-        // In production, this could be a custom notification system
+        // Log notification for debugging/monitoring
+        // Note: In a production environment, this could be enhanced with:
+        // - Toast notifications using a library or custom implementation
+        // - Browser Notification API for desktop notifications
+        // - Integration with external notification systems
         console.log(`[${type.toUpperCase()}] ${message}`);
     }
 
