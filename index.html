@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ANDON System - Rev B</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🚨 ANDON System - Revision B</h1>
+            <div class="system-status">
+                <span class="status-indicator" id="system-status"></span>
+                <span id="status-text">System Active</span>
+            </div>
+        </header>
+
+        <main>
+            <!-- Production Line Status Dashboard -->
+            <section class="dashboard">
+                <h2>Production Line Status</h2>
+                <div class="stations-grid" id="stations-grid">
+                    <!-- Stations will be dynamically generated -->
+                </div>
+            </section>
+
+            <!-- Control Panel -->
+            <section class="control-panel">
+                <h2>Control Panel</h2>
+                <div class="controls">
+                    <button class="btn btn-success" onclick="andonSystem.resetAllStations()">
+                        ✓ Reset All Stations
+                    </button>
+                    <button class="btn btn-warning" onclick="andonSystem.clearHistory()">
+                        🗑️ Clear History
+                    </button>
+                    <button class="btn btn-info" onclick="andonSystem.toggleSound()">
+                        <span id="sound-icon">🔊</span> Toggle Sound
+                    </button>
+                    <button class="btn btn-secondary" onclick="andonSystem.exportData()">
+                        📊 Export Data
+                    </button>
+                </div>
+            </section>
+
+            <!-- Statistics Panel -->
+            <section class="statistics">
+                <h2>Statistics</h2>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-value" id="total-alerts">0</div>
+                        <div class="stat-label">Total Alerts</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="active-alerts">0</div>
+                        <div class="stat-label">Active Alerts</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="resolved-alerts">0</div>
+                        <div class="stat-label">Resolved Today</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="avg-response">-</div>
+                        <div class="stat-label">Avg Response (min)</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Alert History -->
+            <section class="history">
+                <h2>Alert History</h2>
+                <div class="history-controls">
+                    <select id="filter-station" onchange="andonSystem.filterHistory()">
+                        <option value="all">All Stations</option>
+                    </select>
+                    <select id="filter-type" onchange="andonSystem.filterHistory()">
+                        <option value="all">All Types</option>
+                        <option value="help">Help Needed</option>
+                        <option value="defect">Defect</option>
+                        <option value="stop">Line Stop</option>
+                        <option value="maintenance">Maintenance</option>
+                    </select>
+                </div>
+                <div class="history-list" id="history-list">
+                    <p class="no-data">No alerts recorded yet.</p>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>ANDON System Rev B &copy; 2025 | Lean Manufacturing Solution</p>
+            <p class="version">Version 2.0.0</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
